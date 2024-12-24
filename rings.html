@@ -243,6 +243,12 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <style>
+body {
+height:800px;
+    overflow: hidden; /* Prevent scrolling on the overall page */
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+}
 a {
 color:inherit;
 underline:inherit;
@@ -258,6 +264,85 @@ text-decoration:none;
 }
 .element-item .itemDescription {
     display: none; /* Hide the description within the grid */
+}
+
+/* Custom Scroll Bar for the Grid */
+.grid::-webkit-scrollbar {
+    width: 8px; /* Scrollbar width */
+}
+.grid::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Track color */
+    border-radius: 4px; /* Rounded edges */
+}
+.grid::-webkit-scrollbar-thumb {
+    background-color: #555555; /* Scrollbar color */
+    border-radius: 4px; /* Rounded edges */
+    border: 1px solid #333333; /* Border for better visibility */
+}
+.grid::-webkit-scrollbar-thumb:hover {
+    background-color: #777777; /* Lighter color on hover */
+}
+.grid::-moz-scrollbar-thumb {
+    background-color: #555555; /* Cross-browser styling */
+}
+
+/* Filter Bar: Always Visible */
+#filter-bar {
+	width:100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #212121;
+    padding: 10px;
+}
+
+/* Fade-Out Effect */
+.grid::after {
+    content: "";
+    position: absolute;
+    top: 1800px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(33, 33, 33, 0) 25%, #212121 100%);
+    pointer-events: none; /* Allow interaction with grid items */
+}
+.grid {
+    max-height: calc(100vh - 100px); /* Limit grid height to fit the viewport */
+    overflow-y: auto; /* Enable scrolling within the grid */
+    position: relative;
+    padding-right: 10px; /* Add space for the custom scrollbar */
+    margin: 20px auto; /* Center the grid container */
+    box-sizing: border-box; /* Include padding and border in the height calculation */
+    width: 95%; /* Ensure grid fits within the viewport width */
+}
+
+/* Custom Scroll Bar for the Grid */
+.grid::-webkit-scrollbar {
+    width: 8px;
+}
+.grid::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Track color */
+    border-radius: 4px;
+}
+.grid::-webkit-scrollbar-thumb {
+    background-color: #555555; /* Scrollbar color */
+    border-radius: 4px; /* Rounded edges */
+    border: 1px solid #333333; /* Border for better visibility */
+}
+.grid::-webkit-scrollbar-thumb:hover {
+    background-color: #777777; /* Lighter color on hover */
+}
+
+/* Dynamic Fade-Out Effect */
+.grid::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 200px; /* Height of the fade effect */
+    background: linear-gradient(to bottom, rgba(33, 33, 33, 0) 0%, #212121 100%);
+    pointer-events: none; /* Allow interaction with grid items */
 }
 
 </style>
@@ -510,3 +595,30 @@ text-decoration:none;
         <p class="itemDescription">Boosts poise by 40.</p>
     </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.querySelector('.grid');
+    const fadeEffect = document.createElement('div');
+    fadeEffect.className = 'fade-effect';
+
+    // Add fade effect dynamically
+    Object.assign(fadeEffect.style, {
+        position: 'absolute',
+        left: '0',
+        width: '100%',
+        height: '200px',
+        background: 'linear-gradient(to bottom, rgba(33, 33, 33, 0) 0%, #212121 100%)',
+        pointerEvents: 'none',
+    });
+    grid.appendChild(fadeEffect);
+
+    // Update fade effect position on scroll
+    grid.addEventListener('scroll', () => {
+        const scrollBottom = grid.scrollTop + grid.clientHeight;
+        fadeEffect.style.top = `${scrollBottom - 200}px`; // Position fade effect at the bottom of visible items
+    });
+
+    // Initial position of fade effect
+    grid.dispatchEvent(new Event('scroll'));
+});
+</script>
