@@ -1,6 +1,10 @@
-// Initialize Isotope
-document.addEventListener("DOMContentLoaded", function () {
+window.boot.register('page-ready', () => {
     const grid = document.querySelector('.grid');
+
+    if (!grid) {
+        console.error("Grid element not found. Ensure there is an element with class 'grid' in the DOM.");
+        return;
+    }
 
     // Initialize Isotope
     const iso = new Isotope(grid, {
@@ -11,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
             subtype: '[data-subtype]'
         }
     });
+
+    console.log("Isotope initialized successfully.");
+});
+
 	    // Force Isotope to properly layout after all elements are loaded
     window.addEventListener('load', function () {
         iso.arrange({ filter: '*' }); // Ensure all items are visible
