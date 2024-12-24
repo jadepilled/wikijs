@@ -1,0 +1,59 @@
+a {
+color:inherit;
+underline:inherit;
+font-size:inherit;
+text-decoration:none;
+}
+#tooltip {
+    z-index: 1000;
+    font-size: 12px;
+    max-width: 200px;
+    text-align: center;
+    word-wrap: break-word;
+}
+.element-item .itemDescription {
+    display: none; /* Hide the description within the grid */
+}
+.container .headline,
+.page-author-card-name,
+.v-application,
+.v-application .headline,
+.v-application .overline,
+html {
+  font-family: Spectral,Arial,sans-serif!important
+}
+.v-application .subtitle-1,
+html.mdz-backdropfilter body div#root div#app.v-application.v-application--is-ltr.theme--dark.is-ltr div.v-application--wrap main.v-main div.v-main__wrap div.container.grey.pa-0.container--fluid.darken-4-l3 div.row.page-header-section.no-gutters.align-content-center div.page-col-content.is-page-header.offset-lg-3.offset-xl-2.col.pl-4 div.page-header-headings div.caption.grey--text.text--darken-1 button .ml-3 > span:first-child .v-application .body-2,
+html.mdz-backdropfilter body div#root div#app.v-application.v-application--is-ltr.theme--dark.is-ltr div.v-application--wrap main.v-main div.v-main__wrap div.container.pl-5.pt-4.container--fluid.grid-list-xl div.layout.row div.flex.page-col-content.xs12.lg9.xl10.order-xs2 div#discussion.comments-container div.comments-main div div div.d-flex.align-center.pt-3 div.caption.mr-3,
+html.mdz-backdropfilter body div#root div#app.v-application.v-application--is-ltr.theme--dark.is-ltr div.v-application--wrap main.v-main div.v-main__wrap div.container.pl-5.pt-4.container--fluid.grid-list-xl div.layout.row div.flex.page-col-content.xs12.lg9.xl10.order-xs2 div#discussion.comments-container div.comments-main div div div.pt-5.text-center.body-2.blue-grey--text,
+html.mdz-backdropfilter body div#root div#app.v-application.v-application--is-ltr.theme--dark.is-ltr div.v-application--wrap main.v-main div.v-main__wrap div.container.pl-5.pt-4.container--fluid.grid-list-xl div.layout.row div.flex.page-col-sd.order-xs1.lg3.xl2 div.page-author-card.mb-5.v-card.v-sheet.theme--dark div.pa-5 div.page-author-card-name.body-2.grey--text {
+  font-family: Spectral,Arial,sans-serif!important
+}
+.v-main .contents blockquote::before {
+  content: "“";
+  font-size: 2em;
+  font-weight: 700;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: #777
+}
+.theme--dark .v-main .contents blockquote {
+  background-color: #333
+}
+.v-main .contents blockquote {
+  background-color: #333;
+  width: auto;
+  display: table position: relative;
+  border-left: 4px solid transparent;
+  border-left-color: transparent;
+  border-left-color: var(--color-primary);
+  background-color: #f8f8f8;
+  padding: 12px 16px 12px 32px;
+  overflow: auto
+}
+html.mdz-backdropfilter body div#root div#app.v-application.v-application--is-ltr.theme--dark.is-ltr div.v-application--wrap main.v-main div.v-main__wrap div.container.pl-5.pt-4.container--fluid.grid-list-xl div.layout.row div.flex.page-col-content div#discussion.comments-container div.d-flex div.caption.blue-grey--text,
+html.mdz-backdropfilter body div#root div#app.v-application.v-application--is-ltr.theme--dark.is-ltr div.v-application--wrap main.v-main div.v-main__wrap div.container.pl-5.pt-4.container--fluid.grid-list-xl div.layout.row div.flex.page-col-sd div.page-author-card div.page-author-card-date.caption.grey--text.text--darken-1,
+html.mdz-backdropfilter body div#root div#app.v-application.v-application--is-ltr.theme--dark.is-ltr div.v-application--wrap nav.v-navigation-drawer .v-navigation-drawer__content button.ml-3.v-btn span.v-btn__content div.body-2.text-none {
+  font-family: Spectral,Arial,sans-serif!important
+}
