@@ -1,0 +1,343 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+<script>
+
+// Initialize Isotope
+document.addEventListener("DOMContentLoaded", function () {
+    const grid = document.querySelector('.grid');
+
+    // Initialize Isotope
+    const iso = new Isotope(grid, {
+        itemSelector: '.element-item',
+        layoutMode: 'fitRows',
+        getSortData: {
+            name: '.name',
+            subtype: '.subtype'
+        }
+    });
+
+    // Dark mode styling
+    document.body.style.backgroundColor = "#121212";
+    document.body.style.color = "#ffffff";
+    document.body.style.fontFamily = "Arial, sans-serif";
+
+    // Apply grid styling
+    grid.style.display = "flex";
+    grid.style.flexWrap = "wrap";
+    grid.style.gap = "15px";
+
+    // Style grid items
+    const items = document.querySelectorAll('.element-item');
+    items.forEach(item => {
+        item.style.backgroundColor = "#1e1e1e";
+        item.style.color = "#ffffff";
+        item.style.borderRadius = "10px";
+        item.style.padding = "15px";
+        item.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+        item.style.textAlign = "center";
+        item.style.overflow = "hidden";
+        item.setAttribute('data-subtype', item.querySelector('.subtype').textContent.trim()); // Add data-subtype dynamically
+    });
+
+    // Style headings
+    const headings = document.querySelectorAll('.element-item .name');
+    headings.forEach(heading => {
+        heading.style.fontSize = "16px";
+        heading.style.fontWeight = "bold";
+        heading.style.marginBottom = "10px";
+        heading.style.whiteSpace = "nowrap";
+        heading.style.overflow = "hidden";
+        heading.style.textOverflow = "ellipsis";
+    });
+
+    // Style images
+    const images = document.querySelectorAll('.element-item img');
+    images.forEach(image => {
+        image.style.maxWidth = "100%";
+        image.style.borderRadius = "8px";
+        image.style.marginBottom = "10px";
+    });
+
+    // Style subtypes
+    const subtypes = document.querySelectorAll('.element-item .subtype');
+    subtypes.forEach(subtype => {
+        subtype.style.fontSize = "14px";
+        subtype.style.color = "#aaaaaa";
+    });
+
+    // Generate subtype filter buttons dynamically
+    const subtypeSet = new Set();
+    items.forEach(item => {
+        const subtype = item.querySelector('.subtype').textContent.trim();
+        subtypeSet.add(subtype);
+    });
+
+    const filterBar = document.createElement('div');
+    filterBar.id = "filter-bar";
+    filterBar.style.display = "flex";
+    filterBar.style.justifyContent = "center";
+    filterBar.style.flexWrap = "wrap";
+    filterBar.style.gap = "10px";
+    filterBar.style.marginBottom = "20px";
+
+    const allButton = document.createElement('button');
+    allButton.textContent = "Show All";
+    allButton.dataset.filter = "*";
+    allButton.style.backgroundColor = "#333333";
+    allButton.style.color = "#ffffff";
+    allButton.style.padding = "10px 20px";
+    allButton.style.border = "none";
+    allButton.style.borderRadius = "5px";
+    allButton.style.cursor = "pointer";
+    allButton.style.transition = "background-color 0.3s ease";
+    allButton.classList.add('is-checked'); // Default selected
+    allButton.addEventListener('click', () => {
+        iso.arrange({ filter: '*' });
+        updateButtonStyles(allButton);
+    });
+    filterBar.appendChild(allButton);
+
+    subtypeSet.forEach(subtype => {
+        const button = document.createElement('button');
+        button.textContent = subtype;
+        button.dataset.filter = `[data-subtype='${subtype}']`;
+        button.style.backgroundColor = "#333333";
+        button.style.color = "#ffffff";
+        button.style.padding = "10px 20px";
+        button.style.border = "none";
+        button.style.borderRadius = "5px";
+        button.style.cursor = "pointer";
+        button.style.transition = "background-color 0.3s ease";
+        button.addEventListener('click', () => {
+            iso.arrange({ filter: `[data-subtype='${subtype}']` });
+            updateButtonStyles(button);
+        });
+        filterBar.appendChild(button);
+    });
+
+    document.body.insertBefore(filterBar, grid);
+
+    // Update button styles
+    function updateButtonStyles(selectedButton) {
+        const buttons = filterBar.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.style.backgroundColor = "#333333";
+            button.classList.remove('is-checked');
+        });
+        selectedButton.style.backgroundColor = "#555555";
+        selectedButton.classList.add('is-checked');
+    }
+});
+
+
+
+</script>
+
+<div class="grid">
+
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Cat Covenant Ring</h3>
+        
+        <p class="subtype">Covenant</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Darkmoon Blade Covenant Ring</h3>
+        
+        <p class="subtype">Covenant</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Old Witch's Ring</h3>
+        
+        <p class="subtype">Covenant</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Covenant of Artorias</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Covetous Gold Serpent Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Covetous Silver Serpent Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Dark Wood Grain Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Dusk Crown Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">East Wood Grain Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Lingering Dragoncrest Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Orange Charred Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Rare Ring of Sacrifice</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Red Tearstone Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Ring of Fog</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Ring of Sacrifice</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Ring of the Evil Eye</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Ring of the Sun Princess</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Ring of the Sun's Firstborn</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Rusted Iron Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Slumbering Dragoncrest Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">White Seance Ring</h3>
+        
+        <p class="subtype">Special Effect</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Bellowing Dragoncrest Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Bloodbite Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Blue Tearstone Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Calamity Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Cloranthy Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Cursebite Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Darkmoon Seance Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Flame Stoneplate Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Havel's Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Hawk Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Hornet Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Leo Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Poisonbite Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Ring of Favor and Protection</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Ring of Steel Protection</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Speckled Stoneplate Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Spell Stoneplate Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Thunder Stoneplate Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Tiny Being's Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+    <div class="element-item Rings" data-category="Rings">
+        <h3 class="name">Wolf Ring</h3>
+        
+        <p class="subtype">Stat Affecting</p>
+    </div>
+</div>
