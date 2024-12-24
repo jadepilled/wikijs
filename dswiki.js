@@ -174,7 +174,7 @@ subtypes.forEach(subtype => {
     subtype.style.textAlign = "center";
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+window.boot.register('page-ready', () => {
     const tooltip = document.createElement('div');
     tooltip.id = 'tooltip';
     tooltip.style.position = 'absolute';
@@ -189,20 +189,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const items = document.querySelectorAll('.element-item');
     items.forEach(item => {
-        const description = item.querySelector('.itemDescription').textContent.trim();
+        const description = item.querySelector('.itemDescription')?.textContent.trim() || "No description available.";
 
         item.addEventListener('mouseenter', (event) => {
             if (description) {
-                tooltip.textContent = description || "No description available.";
+                tooltip.textContent = description;
                 tooltip.style.opacity = '1';
-                tooltip.style.left = ${event.pageX + 10}px; // Position near cursor
-                tooltip.style.top = ${event.pageY + 10}px;
+                tooltip.style.left = `${event.pageX + 10}px`; // Position near cursor
+                tooltip.style.top = `${event.pageY + 10}px`;
             }
         });
 
         item.addEventListener('mousemove', (event) => {
-            tooltip.style.left = ${event.pageX + 10}px;
-            tooltip.style.top = ${event.pageY + 10}px;
+            tooltip.style.left = `${event.pageX + 10}px`;
+            tooltip.style.top = `${event.pageY + 10}px`;
         });
 
         item.addEventListener('mouseleave', () => {
@@ -210,3 +210,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
